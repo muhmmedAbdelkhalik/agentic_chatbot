@@ -11,7 +11,7 @@ class LoadStreamlitUI:
 
     def load_ui(self):
         st.set_page_config(page_title=self.config.get_page_title())
-        st.header("🤖 " + self.config.get_page_title())
+        st.header(self.config.get_page_title())
 
 
         with st.sidebar:

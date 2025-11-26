@@ -14,9 +14,18 @@ class GraphBuilder:
         """
 
         self.basic_chatbot_node = BasicChatbotNode(self.llm_model)
-        
+
         self.graph_builder.add_node("chatbot", self.basic_chatbot_node.run)
         self.graph_builder.add_edge(START, "chatbot")
         self.graph_builder.add_edge("chatbot", END)
 
         return self.graph_builder
+    
+    def setup_graph(self, usecase: str):
+        """
+        Setup the graph based on the use case
+        """
+        if usecase == "Basic":
+            self.basic_chatbot_build_graph()
+        
+        return self.graph_builder.compile()

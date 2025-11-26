@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-from langchain_groq import Groq
+from langchain_groq import ChatGroq
 
 class GroqLLM:
     def __init__(self, user_controls: dict):
@@ -16,7 +16,7 @@ class GroqLLM:
             if not selected_groq_model:
                 st.error("Groq model is required")
                 return None
-            llm = Groq(api_key=groq_api_key, model=selected_groq_model)
+            llm = ChatGroq(api_key=groq_api_key, model=selected_groq_model)
             return llm
         except Exception as e:
             st.error(f"Error getting Groq LLM model: {e}")
