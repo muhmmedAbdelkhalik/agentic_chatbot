@@ -12,6 +12,8 @@ class LoadStreamlitUI:
     def load_ui(self):
         st.set_page_config(page_title=self.config.get_page_title())
         st.header(self.config.get_page_title())
+        st.session_state.timeframe = ''
+        st.session_state.isFetchButtonClicked = False
 
         with st.sidebar:
             # Get options from config
@@ -38,11 +40,19 @@ class LoadStreamlitUI:
             self.user_controls["selected_usecase"] = st.selectbox(
                 "Select Usecases", usecase_options)
 
-            if self.user_controls["selected_usecase"] == "Tools":
+            if self.user_controls["selected_usecase"] == "Tools" or self.user_controls["selected_usecase"] == "News":
                 os.environ["TAVILY_API_KEY"] = self.user_controls["TAVILY_API_KEY"] = st.session_state["TAVILY_API_KEY"] = st.text_input(
                     "Tavily API Key", type="password")
                 if not os.environ["TAVILY_API_KEY"]:
                     st.warning(
                         "⚠️ Please enter your TAVILY API key to proceed. Don't have? refer : https://www.tavily.com")
+            if self.user_controls["selected_usecase"] == "News":
+                st.subheader("News")
+                with st.sidebar:
+                    time_frame = st.selectbox("Select Time Frame", [
+                                              "Daily", "Weekly", "Monthly"], index=0)
+                if st.button("Load News", use_container_width=True):
+                    st.session_state.isFetchButtonClicked = True
+                    st.session_state.timeframe = time_frame
 
         return self.user_controls

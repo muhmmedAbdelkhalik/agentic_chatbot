@@ -5,6 +5,7 @@ from src.langgraph_agentic_ai.state.state import State
 from langgraph.graph import START, END
 from src.langgraph_agentic_ai.nodes.basic_chatbot_node import BasicChatbotNode
 from src.langgraph_agentic_ai.tools.search_tool import get_tools, create_tool_node
+from src.langgraph_agentic_ai.nodes.ai_news_node import AINewsNode
 
 
 class GraphBuilder:
@@ -53,6 +54,27 @@ class GraphBuilder:
         self.graph_builder.add_edge("chatbot", END)
         return self.graph_builder
 
+
+    def news_chatbot_build_graph(self):
+        """
+        Build the graph for the agentic AI for News Chatbot
+        """
+
+        # Add nodes
+        news_node = AINewsNode(self.llm_model)
+
+
+        self.graph_builder.add_node("news", news_node.fetch_news)
+        self.graph_builder.add_node("summarize", news_node.summarize_news)
+        self.graph_builder.add_node("result", news_node.save_result)
+
+        # Define direct edges
+        self.graph_builder.set_entry_point("news") # Set the entry point to the news node (Same to START)
+        self.graph_builder.add_edge("news", "summarize")
+        self.graph_builder.add_edge("summarize", "result")
+        self.graph_builder.add_edge("result", END)
+        return self.graph_builder
+
     def setup_graph(self, usecase: str):
         """
         Setup the graph based on the use case
@@ -61,6 +83,8 @@ class GraphBuilder:
             self.basic_chatbot_build_graph()
         elif usecase == "Tools":
             self.tools_chatbot_build_graph()
+        elif usecase == "News":
+            self.news_chatbot_build_graph()
         else:
             raise ValueError(f"Error: No use case selected: {usecase}")
         return self.graph_builder.compile()
