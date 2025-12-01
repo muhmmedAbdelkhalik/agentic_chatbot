@@ -17,7 +17,7 @@ from src.langgraph_agentic_ai.domain.exceptions import (
 )
 from src.langgraph_agentic_ai.tools.search_tool import get_tools
 from src.langgraph_agentic_ai.graph.graph_builder import GraphBuilder
-from src.langgraph_agentic_ai.ui.streamlit.display_result import DisplayResultStreamlit
+from langchain_core.messages import HumanMessage
 
 
 def load_langgraph_agenticai_app():
@@ -70,16 +70,39 @@ def load_langgraph_agenticai_app():
             presenter.render()
         
         elif selected_usecase == UseCase.TOOLS:
-            # Tools use case still uses the old graph-based approach
-            # TODO: Migrate to new architecture in Phase 2
+            # Tools use case uses graph-based approach with inline display
             llm_provider = container.get_llm_provider(model_config)
             raw_llm = llm_provider.get_raw_client()
             
             user_message = st.chat_input("Enter your message:", key="tools_chat_input")
             if user_message:
+                # Build and execute graph
                 graph_builder = GraphBuilder(raw_llm)
                 graph = graph_builder.setup_graph("Tools")
-                DisplayResultStreamlit("Tools", graph, user_message).display_result_on_ui()
+                
+                # Display user message
+                with st.chat_message("user"):
+                    st.write(user_message)
+                
+                # Execute graph and display results
+                with st.spinner("Thinking..."):
+                    events = graph.stream(
+                        {"messages": [HumanMessage(content=user_message)]},
+                        stream_mode="values"
+                    )
+                    
+                    # Get final state
+                    final_state = None
+                    for event in events:
+                        final_state = event
+                    
+                    if final_state and "messages" in final_state:
+                        # Display assistant response
+                        with st.chat_message("assistant"):
+                            for message in final_state["messages"]:
+                                if hasattr(message, 'content') and message.content:
+                                    if not isinstance(message, HumanMessage):
+                                        st.write(message.content)
         
         elif selected_usecase == UseCase.NEWS:
             news_use_case = container.get_news_generation_use_case(model_config)
