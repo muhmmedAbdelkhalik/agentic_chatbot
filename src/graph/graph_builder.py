@@ -1,11 +1,11 @@
 from langgraph.graph import StateGraph
 from langgraph.prebuilt import tools_condition
-from src.langgraph_agentic_ai.nodes.tool_chatbot_node import ToolChatbotNode
-from src.langgraph_agentic_ai.state.state import State
+from src.nodes.tool_chatbot_node import ToolChatbotNode
+from src.state.state import State
 from langgraph.graph import START, END
-from src.langgraph_agentic_ai.nodes.basic_chatbot_node import BasicChatbotNode
-from src.langgraph_agentic_ai.tools.search_tool import get_tools, create_tool_node
-from src.langgraph_agentic_ai.nodes.ai_news_node import AINewsNode
+from src.nodes.basic_chatbot_node import BasicChatbotNode
+from src.tools.search_tool import get_tools, create_tool_node
+from src.nodes.ai_news_node import AINewsNode
 
 
 class GraphBuilder:

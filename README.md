@@ -360,7 +360,9 @@ agentic_chatbot/
 ├── README.md                           # This file
 │
 ├── docs/                               # Documentation
-│   └── CODE_REVIEW_4.md                # Comprehensive code review
+│   ├── CODE_REVIEW_4.md                # Comprehensive code review
+│   ├── CLEANUP_SUMMARY.md              # Cleanup documentation
+│   └── ...                             # Other docs
 │
 ├── md/                                 # News summary outputs
 │   ├── daily_summary.md
@@ -370,52 +372,49 @@ agentic_chatbot/
 ├── logs/                               # Application logs
 │   └── app.log
 │
-├── src/
-│   └── langgraph_agentic_ai/
-│       │
-│       ├── main.py                     # Main orchestration (refactored)
-│       │
-│       ├── domain/                     # 🆕 Domain layer (business logic)
-│       │   ├── entities/               # Rich domain entities
-│       │   ├── value_objects/          # Immutable value objects
-│       │   ├── interfaces/             # Domain interfaces (ports)
-│       │   ├── validation/             # Input validation
-│       │   ├── exceptions.py           # Custom exceptions
-│       │   └── constants.py            # Application constants
-│       │
-│       ├── application/                # 🆕 Application layer (use cases)
-│       │   ├── use_cases/              # Business use cases
-│       │   └── dto/                    # Data transfer objects
-│       │
-│       ├── infrastructure/             # 🆕 Infrastructure layer (adapters)
-│       │   ├── llm/                    # LLM adapters
-│       │   ├── search/                 # Search service adapters
-│       │   ├── storage/                # File storage adapters
-│       │   ├── security/               # Security components
-│       │   ├── logging/                # Logging infrastructure
-│       │   └── di/                     # Dependency injection
-│       │
-│       ├── presentation/               # 🆕 Presentation layer (UI)
-│       │   └── streamlit/              # Streamlit adapters
-│       │
-│       ├── config/                     # Configuration management
-│       │   ├── config.py               # Config loader (updated)
-│       │   └── default.ini             # Default settings
-│       │
-│       ├── graph/                      # LangGraph builders (legacy)
-│       ├── llms/                       # LLM integrations (legacy)
-│       ├── nodes/                      # LangGraph nodes (legacy)
-│       ├── state/                      # State management
-│       ├── tools/                      # External tools
-│       └── ui/                         # UI components (legacy)
+├── src/                                # 🎯 Source code (clean architecture)
+│   │
+│   ├── main.py                         # Main orchestration
+│   │
+│   ├── domain/                         # Domain layer (business logic)
+│   │   ├── entities/                   # Rich domain entities
+│   │   ├── value_objects/              # Immutable value objects
+│   │   ├── interfaces/                 # Domain interfaces (ports)
+│   │   ├── validation/                 # Input validation
+│   │   ├── exceptions.py               # Custom exceptions
+│   │   └── constants.py                # Application constants
+│   │
+│   ├── application/                    # Application layer (use cases)
+│   │   ├── use_cases/                  # Business use cases
+│   │   └── dto/                        # Data transfer objects
+│   │
+│   ├── infrastructure/                 # Infrastructure layer (adapters)
+│   │   ├── llm/                        # LLM adapters
+│   │   ├── search/                     # Search service adapters
+│   │   ├── storage/                    # File storage adapters
+│   │   ├── security/                   # Security components
+│   │   ├── logging/                    # Logging infrastructure
+│   │   └── di/                         # Dependency injection
+│   │
+│   ├── presentation/                   # Presentation layer (UI)
+│   │   └── streamlit/                  # Streamlit adapters
+│   │
+│   ├── config/                         # Configuration management
+│   │   ├── config.py                   # Config loader
+│   │   └── default.ini                 # Default settings
+│   │
+│   ├── graph/                          # LangGraph builders
+│   ├── nodes/                          # LangGraph nodes
+│   ├── state/                          # State management
+│   └── tools/                          # External tools
 │
-└── tests/                              # 🆕 Test suite
+└── tests/                              # Test suite
     ├── unit/                           # Unit tests
     ├── integration/                    # Integration tests
     └── fixtures/                       # Test fixtures
 ```
 
-> **🆕 New in Phase 1**: Clean architecture with domain, application, infrastructure, and presentation layers
+> **✨ Clean Structure**: Everything is now directly under `src/` for maximum clarity and simplicity
 
 ### Key Files Explained
 

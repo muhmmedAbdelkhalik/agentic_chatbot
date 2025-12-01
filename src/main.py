@@ -5,18 +5,18 @@ This module initializes the application using clean architecture principles
 with dependency injection and proper separation of concerns.
 """
 import streamlit as st
-from src.langgraph_agentic_ai.config.config import Config
-from src.langgraph_agentic_ai.infrastructure.di.container import DIContainer
-from src.langgraph_agentic_ai.presentation.streamlit.config_presenter import ConfigPresenter
-from src.langgraph_agentic_ai.presentation.streamlit.chat_presenter import ChatPresenter
-from src.langgraph_agentic_ai.domain.constants import UseCase
-from src.langgraph_agentic_ai.domain.value_objects.model_config import ModelConfig
-from src.langgraph_agentic_ai.domain.exceptions import (
+from src.config.config import Config
+from src.infrastructure.di.container import DIContainer
+from src.presentation.streamlit.config_presenter import ConfigPresenter
+from src.presentation.streamlit.chat_presenter import ChatPresenter
+from src.domain.constants import UseCase
+from src.domain.value_objects.model_config import ModelConfig
+from src.domain.exceptions import (
     MissingCredentialError,
     ConfigurationError
 )
-from src.langgraph_agentic_ai.tools.search_tool import get_tools
-from src.langgraph_agentic_ai.graph.graph_builder import GraphBuilder
+from src.tools.search_tool import get_tools
+from src.graph.graph_builder import GraphBuilder
 from langchain_core.messages import HumanMessage
 
 

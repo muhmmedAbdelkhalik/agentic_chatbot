@@ -2,7 +2,7 @@
 import pytest
 import os
 from unittest.mock import patch
-from src.langgraph_agentic_ai.infrastructure.security.credential_manager import CredentialManager
+from src.infrastructure.security.credential_manager import CredentialManager
 
 
 class TestCredentialManager:

@@ -1,4 +1,4 @@
-from src.langgraph_agentic_ai.state.state import State
+from src.state.state import State
 
 
 class ToolChatbotNode:

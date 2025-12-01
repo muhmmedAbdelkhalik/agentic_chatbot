@@ -1,7 +1,7 @@
 """Tests for message validator."""
 import pytest
-from src.langgraph_agentic_ai.domain.validation.message_validator import MessageValidator
-from src.langgraph_agentic_ai.domain.exceptions import (
+from src.domain.validation.message_validator import MessageValidator
+from src.domain.exceptions import (
     ValidationError,
     PromptInjectionError,
     MessageTooLongError,
